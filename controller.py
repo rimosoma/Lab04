@@ -1,12 +1,31 @@
 import time
 import flet as ft
 import model as md
+import view
+
 
 class SpellChecker:
 
-    def __init__(self, view):
+    def __init__(self, v : view.View):
         self._multiDic = md.MultiDictionary()
-        self._view = view
+        self._view = v
+
+
+
+    def handle_lingua_tendina(self, e):
+        if self._view._dd1.value:
+            self._view.selezioneLingua.value =  f"Selezione andata a buon fine: {self._view._dd1.value}"
+        else:
+            self._view.selezioneLingua.value = "Selezione non valida"
+        self._view.page.update()
+
+
+    def handle_modo_tendina(self, e):
+        if self._view._dd2.value:
+            self._view.selezionaModo.value = f"Selezione andata a buon fine: {self._view._dd2.value}"
+        else:
+            self._view.selezionaModo.value = "Selezione non valida"
+        self._view.page.update()
 
     def handleSentence(self, txtIn, language, modality):
         txtIn = replaceChars(txtIn.lower())
