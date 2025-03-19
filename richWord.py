@@ -3,9 +3,9 @@ class RichWord:
         self._parola = parola
         self._corretta = None
 
-    # def isCorretta(self):
-    #     if self._corretta is not None:
-    #         return self._corretta
+    def isCorretta(self):
+        if self._corretta is not None:
+            return self._corretta
 
     @property
     def corretta(self):

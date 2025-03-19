@@ -30,11 +30,14 @@ class MultiDictionary:
             word = word.lower()
             found = False
             richW = rw.RichWord(word)
+            print(f"{word} portata a richword, controllo nel di .{language}. ")
             if language == "english":
                 if self._english.dict.__contains__(word):
                     found = True
             elif language == "italian":
+                print("lingua italiana, cerco")
                 if self._italian.dict.__contains__(word):
+                    #print(f"Word {word} found")
                     found = True
             elif language == "spanish":
                 if self._spanish.dict.__contains__(word):

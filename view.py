@@ -24,7 +24,15 @@ class View(object):
         self._dd2 = None
         self.selezionaModo = ft.Text(value="In attesa di selezione")
         self._parolaInput = ft.TextField(label="Parola Ricercata")
+        self._fraseDecisa = ft.Text(value="")
 
+        self._bottoneAvvio = None
+        self.messaggioErroreAvvio = ft.Text(value="", color="red")
+        self.elencoParole = ft.ListView(expand=20, spacing=10, padding=20, auto_scroll=True)
+        self.tempoImpiegato = ft.Text(value="")
+        self.row4 = None
+
+        self.row3 = None
         # define the UI elements and populate the page
 
     def add_content(self):
@@ -38,9 +46,9 @@ class View(object):
 
         self._dd1 = ft.Dropdown(label="Lingue",
                      hint_text="Seleziona la lingua",
-                     options=[ft.dropdown.Option("Italiano"),
-                              ft.dropdown.Option("Inglese"),
-                              ft.dropdown.Option("Spagnolo")], on_change=self.__controller.handle_lingua_tendina)
+                     options=[ft.dropdown.Option("italian"),
+                              ft.dropdown.Option("english"),
+                              ft.dropdown.Option("spanish")], on_change=self.__controller.handle_lingua_tendina)
 
         self.row1 = ft.Row(spacing=10, controls=[self._dd1, self.selezioneLingua])
         self.page.add(self.row1)
@@ -50,11 +58,20 @@ class View(object):
         self._dd2 = ft.Dropdown(label="Modo di ricerca",
                                 hint_text="Seleziona il modo di ricerca",
                                 options=[ft.dropdown.Option("Default"),
-                                         ft.dropdown.Option("Lineare"),
-                                         ft.dropdown.Option("Dicotomica")], on_change=self.__controller.handle_modo_tendina)
+                                         ft.dropdown.Option("Linear"),
+                                         ft.dropdown.Option("Dichotomic")], on_change=self.__controller.handle_modo_tendina)
 
-        self.row2 = ft.Row(spacing=10, controls=[self._dd2, ft.Text(value="                                                 "), self.selezionaModo ,self._parolaInput],)
+
+        self._bottoneAvvio = ft.ElevatedButton(text="Avvio Ricerca",on_click=self.__controller.handleAvvioRicerca  )
+
+        self.row2 = ft.Row(spacing=10, controls=[self._dd2, self.selezionaModo, ft.Text(value="                                                 ") ,self._parolaInput,self._bottoneAvvio, self.messaggioErroreAvvio])
         self.page.add(self.row2)
+
+
+        self.row3 = ft.Row(spacing=10, controls=[ft.Text(value="La tua frase da correggere:") ,   self._fraseDecisa])
+
+        self.row4 = ft.Row(spacing=10, controls=[self.elencoParole, self.tempoImpiegato])
+        self.page.add(self.row3, self.row4)
 
         # Add your stuff here
 
